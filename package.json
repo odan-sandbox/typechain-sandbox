@@ -1,0 +1,48 @@
+{
+  "name": "typescript-nodejs-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@0x/abi-gen": "^4.2.1",
+    "@types/chai": "^4.2.4",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.6.8",
+    "@typescript-eslint/eslint-plugin": "^1.12.0",
+    "@typescript-eslint/parser": "^1.12.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "ganache-cli": "^6.7.0",
+    "ganache-core": "^2.8.0",
+    "jest": "^24.8.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "truffle": "^5.0.43",
+    "truffle-typings": "^1.0.8",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.4.1",
+    "typechain": "^1.0.3",
+    "typechain-target-truffle": "^1.0.2",
+    "typechain-target-web3-v1": "^1.0.3",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "prebuild": "yarn build:contract && yarn gen:typechain",
+    "build": "tsc -p tsconfig.build.json",
+    "build:contract": "truffle build",
+    "test": "run-p test:*",
+    "test:build": "yarn build --noEmit",
+    "test:jest": "yarn jest",
+    "test:lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
+    "gen:typechain": "run-s gen:typechain:*",
+    "gen:typechain:web3": "typechain --target=web3-v1 'build/contracts/**/*.json' --outDir generated-abi/typechain/web3",
+    "gen:typechain:truffle": "typechain --target=truffle 'build/contracts/**/*.json' --outDir generated-abi/typechain/truffle"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.4.0",
+    "web3": "^1.2.4",
+    "web3-eth": "^1.2.2",
+    "web3-utils": "^1.2.4"
+  }
+}
